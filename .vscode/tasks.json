@@ -1,0 +1,56 @@
+{
+  "version": "2.0.0",
+  "windows": {
+    "options": {
+      "shell": {
+        "executable": "cmd.exe",
+        "args": [
+          "/C",
+          "\"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/Tools/VsDevCmd.bat\"",
+          "&&"
+        ]
+      }
+    }
+  },
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "build",
+      "command": "MSBuild.exe",
+      "args": [
+        "./build/windows/vs2022/${workspaceFolderBasename}.sln"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "process",
+      "label": "rundebug",
+      "command": "${workspaceFolder}/bin/${workspaceFolderBasename}d.exe",
+      "args": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "shell",
+      "label": "build-wsl",
+      "options": {
+        "shell": {
+          "executable": "wsl",
+          "args": [
+            "-d", "Ubuntu"
+          ]
+        }
+      },
+      "command": "source ~/.profile && make -C \"$(wslpath \"${workspaceFolder}\")\"/build/linux/gmake",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "Scroll Header": {
+    "prefix": "scroll-header, scroll",
+    "body": [
+      "#ifndef ${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H",
+      "#define ${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H",
+      "",
+      "#include \"${WORKSPACE_NAME}.h\"",
+      "",
+      "class ${TM_FILENAME_BASE} : public ScrollObject",
+      "{",
+      "public:",
+      "",
+      "private:",
+      "  virtual void    OnCreate();",
+      "  virtual void    OnDelete();",
+      "  virtual void    Update(const orxCLOCK_INFO &_rstInfo);",
+      "};",
+      "",
+      "#endif"
+    ],
+    "description": "Create boilerplate scroll object header."
+  },
+  "Scroll CPP": {
+    "prefix": "scroll-cpp, scroll",
+    "body": [
+      "#include \"${TM_FILENAME_BASE}.h\"",
+      "",
+      "void ${TM_FILENAME_BASE}::OnCreate() { }",
+      "",
+      "void ${TM_FILENAME_BASE}::OnDelete() { }",
+      "",
+      "void ${TM_FILENAME_BASE}::Update(const orxCLOCK_INFO &_rstInfo) { }",
+    ],
+    "description": "Create biolerplate scroll object implementation"
+  }
+}
